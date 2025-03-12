@@ -41,14 +41,18 @@ fn chacha20_xor(mut input1: [bool; 32], input2: [bool; 32]) -> [bool; 32] {
 fn chacha20_add(input1: [bool; 32], input2: [bool; 32]) -> [bool; 32] {
     let mut output = [false; 32];
 
-    let mut c = false;
+    output[0] = input1[0] ^ input2[0];
+    let mut c = input1[0] & input2[0];
 
-    for i in 0..32 {
+    for i in 1..31 {
         let t = input1[i] ^ input2[i];
         let s = input1[i] & input2[i];
         output[i] = t ^ c;
         c = s | (t & c);
     }
+
+    output[31] = input1[31] ^ input2[31] ^ c;
+
     output
 }
 

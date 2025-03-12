@@ -1,5 +1,5 @@
 fn chacha20_rotl(x: u32, n: u8) -> u32 {
-    (x << n) | (x >> (32 - n))
+    (x << n) + (x >> (32 - n))
 }
 
 fn chacha20_qr(mut a: u32, mut b: u32, mut c: u32, mut d: u32) -> [u32; 4] {

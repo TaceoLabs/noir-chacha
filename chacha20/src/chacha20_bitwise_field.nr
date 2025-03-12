@@ -43,7 +43,10 @@ fn chacha20_add(input1: [Field; 32], input2: [Field; 32]) -> [Field; 32] {
 
     let mut c = 0;
 
-    for i in 0..32 {
+    let mut c = input1[0] * input2[0];
+    output[0] = input1[0] + input2[0] - 2 * c;
+
+    for i in 1..31 {
         let mul = input1[i] * input2[i];
         let t = input1[i] + input2[i] - 2 * mul;
         let s = mul;
@@ -51,6 +54,12 @@ fn chacha20_add(input1: [Field; 32], input2: [Field; 32]) -> [Field; 32] {
         output[i] = t + c - 2 * mul;
         c = 1 - ((1 - s) * (1 - mul));
     }
+
+    let mul = input1[31] * input2[31];
+    let t = input1[31] + input2[31] - 2 * mul;
+    let mul = t * c;
+    output[31] = t + c - 2 * mul;
+
     output
 }
 
