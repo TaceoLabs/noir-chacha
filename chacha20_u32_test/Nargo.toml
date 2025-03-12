@@ -1,5 +1,5 @@
 [package]
-name = "chacha20_test"
+name = "chacha20_u32_test"
 type = "bin"
 authors = ["TACEO"]
 

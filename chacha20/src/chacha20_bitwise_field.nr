@@ -126,6 +126,14 @@ pub fn chacha20_block(input: [[Field; 32]; 16]) -> [[Field; 32]; 16] {
     state
 }
 
+fn range_check_state(state: [[Field; 32]; 16]) {
+    for i in 4..16 {
+        for j in 0..32 {
+            state[i][j].assert_max_bit_size::<1>();
+        }
+    }
+}
+
 pub fn chacha20(
     key: [[Field; 32]; 8],
     nonce: [[Field; 32]; 3],
@@ -162,6 +170,7 @@ pub fn chacha20(
         nonce[2],
         counter,
     ];
+    range_check_state(state);
 
     let mut output = chacha20_block(state);
     for i in 0..16 {
