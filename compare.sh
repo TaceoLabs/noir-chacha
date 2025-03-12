@@ -6,9 +6,8 @@ BARRETENBERG_VERSION=0.72.1 ##specify the desired barretenberg version here or u
 
 CONOIR_PATH="/home/rwalch/Work/Taceo/product_dev/collaborative-circom"
 PLAINDRIVER="${CONOIR_PATH}/target/release/plaindriver"
-exit_code=0
-
 CRS_PATH="${CONOIR_PATH}/co-noir/co-noir/examples/test_vectors"
+exit_code=0
 
 REMOVE_OUTPUT=1
 PIPE=""
